@@ -23,7 +23,7 @@
                   <routerLink class="nav-link" :to="{ name: 'service.index' }">Pelayanan</routerLink>
                </li>
             </ul>
-            <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3" :class="auth.user ? 'd-none' : 'd-block'">
                <div class="bg-success py-2 px-2 rounded">
                   <routerLink class="text-white text-decoration-none" :to="{ name: 'login' }">Login</routerLink>
                </div>
@@ -31,17 +31,33 @@
                   <routerLink class="text-white text-decoration-none" :to="{ name: 'register' }">Register</routerLink>
                </div>
             </div>
-            <!-- <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center gap-3" :class="auth.user ? 'd-block' : 'd-none'">
                <div class="bg-success py-2 px-2 rounded">
                   <routerLink class="text-white text-decoration-none" :to="{ name: 'dashboard.index' }">Dashboard</routerLink>
                </div>
-               <button class="btn btn-primary">Logout</button>
-            </div> -->
+               <button class="btn btn-primary" @click="logout()">Logout</button>
+            </div>
          </div>
       </div>
    </nav>
 </template>
 
-<script>
-   export default {};
+<script setup>
+   import { useRouter } from "vue-router";
+   import { useAuthStore } from "../store/auth";
+   import { httpRequest } from "../utils/axiosInstance";
+
+   const auth = useAuthStore();
+   const router = useRouter();
+
+   const logout = async () => {
+      await httpRequest
+         .delete("/auth/logout")
+         .then((res) => {
+            if (res.status === 200) {
+               router.push({ name: "login" });
+            }
+         })
+         .catch((err) => console.log(err));
+   };
 </script>
