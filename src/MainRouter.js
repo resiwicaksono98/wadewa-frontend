@@ -40,6 +40,11 @@ const routes = [
       name: "dashboard.index",
       component: () => import("./views/Dashboard/Index.vue"),
    },
+   {
+      path: "/complaint/:id",
+      name: "complaint.detail",
+      component: () => import("./views/Dashboard/Detail.vue"),
+   },
    //  service
    {
       path: "/service",

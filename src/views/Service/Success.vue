@@ -7,7 +7,7 @@
          <img src="../../assets/success.png" class="img-fluid rounded-top w-50" alt="" />
       </div>
       <h5 class="d-flex justify-content-center my-4">
-         <router-link :to="{ name: 'news.index' }" class="text-decoration-none">Cek Dashboard</router-link>
+         <router-link :to="{ name: 'dashboard.index' }" class="text-decoration-none">Cek Dashboard</router-link>
       </h5>
    </div>
 </template>

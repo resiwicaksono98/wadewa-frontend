@@ -4,7 +4,7 @@
    <Navbar />
    <div class="container my-5">
       <h2 class="text-center">Formulir Pelayanan</h2>
-      <form>
+      <form @submit.prevent="store()">
          <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Jenis Keluhan</label>
             <select class="form-select" aria-label="Default select example">
@@ -22,14 +22,18 @@
             <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
          </div>
-         <button class="btn btn-primary">Kirim Formulir</button>
+         <button type="submit" class="btn btn-primary">Kirim Formulir</button>
       </form>
    </div>
 </template>
 
-<script>
+<script setup>
+   import { useRouter } from "vue-router";
    import Navbar from "../../components/Navbar.vue";
-   export default {
-      components: { Navbar },
-   };
+
+   const router = useRouter();
+
+   async function store() {
+      router.push({ name: "service.success", params: { id: 222 } });
+   }
 </script>

@@ -22,7 +22,7 @@
 <script>
    import { reactive, ref } from "vue";
    import { useRouter } from "vue-router";
-   import httpRequest from "../../utils/axiosInstance";
+   import { httpRequest } from "../../utils/axiosInstance";
 
    export default {
       setup() {
