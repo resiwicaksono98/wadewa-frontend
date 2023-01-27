@@ -18,10 +18,16 @@ const routes = [
       name: "home.index",
       component: () => import("./views/Home/Index.vue"),
    },
+   //  News
    {
       path: "/news",
       name: "news.index",
       component: () => import("./views/News/Index.vue"),
+   },
+   {
+      path: "/news/:id",
+      name: "news.detail",
+      component: () => import("./views/News/Detail.vue"),
    },
    {
       path: "/profile",

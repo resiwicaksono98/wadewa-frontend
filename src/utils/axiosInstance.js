@@ -1,11 +1,8 @@
 /** @format */
 
 import axios from "axios";
-const BASE_URL = `http://localhost:5000/api`;
 
-const httpRequest = axios.create({
-   baseURL: BASE_URL,
+export const httpRequest = axios.create({
+   baseURL: import.meta.env.VITE_BASE_URL,
    withCredentials: true,
 });
-
-export default httpRequest;
