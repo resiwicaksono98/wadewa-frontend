@@ -7,11 +7,15 @@
       <h3>Dashboard</h3>
       <div class="row">
          <div class="col">
-            <router-link :to="{ name: 'complaint.detail', params: { id: 23 } }" class="text-decoration-none">
-               <div class="card hover-gray mb-3">
-                  <div class="card-body">Tanggal 10 Januari, Surat Pembuatan KTP, status : <span class="badge text-bg-primary">Pending</span></div>
-               </div>
-            </router-link>
+            <div v-for="(complaint, i) in complaintRes" :key="i">
+               <router-link :to="{ name: 'complaint.detail', params: { id: complaint.complaintResultId } }" class="text-decoration-none">
+                  <div class="card hover-gray mb-3">
+                     <div class="card-body">
+                        {{ moment(complaint.createdAt).format("D MMMM YYYY") }}, {{ complaint.letter.title }}, status : <span class="badge text-bg-primary">{{ complaint.status }}</span>
+                     </div>
+                  </div>
+               </router-link>
+            </div>
          </div>
       </div>
    </div>
@@ -20,8 +24,8 @@
 <script setup>
    import Navbar from "../../components/Navbar.vue";
    import { ref, onBeforeMount } from "vue";
-   import axios from "axios";
    import { httpRequest } from "../../utils/axiosInstance";
+   import moment from "moment";
 
    const complaintRes = ref([]);
 
@@ -30,7 +34,7 @@
          await httpRequest
             .get(`/complaintResult`)
             .then((res) => {
-               console.log(res.data.data);
+               complaintRes.value = res.data.data;
             })
             .catch((err) => console.log(err));
       };
